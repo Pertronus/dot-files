@@ -1,0 +1,6 @@
+require('core.colour')
+require('core.completion')
+require('core.lsp')
+require('core.treesitter')
+require('core.keymaps')
+require('core.config')

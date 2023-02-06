@@ -22,4 +22,5 @@ if boot_strapping then
 end
 
 
--- require( "core.startup" )
+require( "core" )
+

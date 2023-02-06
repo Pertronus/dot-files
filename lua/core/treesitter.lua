@@ -25,4 +25,4 @@ require'nvim-treesitter.configs'.setup {
 
 -- Treesitter folding 
 -- vim.wo.foldmethod = 'expr'
--
+
