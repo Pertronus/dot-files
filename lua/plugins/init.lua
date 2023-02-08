@@ -6,13 +6,20 @@ return require('packer').startup(function(use)
 
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
-		requires = { {'nvim-lua/plenary.nvim'} }
+		requires = { 
+         {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope-file-browser.nvim'
+         } 
+      }
 	}
 
 
 	use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
 
-	use ( 'windwp/nvim-autopairs' )
+	use { 'windwp/nvim-autopairs',
+      config = function() require('nvim-autopairs').setup {} end
+   }
 
 	use {
 		'nvim-tree/nvim-tree.lua',
@@ -29,8 +36,6 @@ return require('packer').startup(function(use)
 	use ( 'ThePrimeagen/harpoon' )
 	use ( 'mbbill/undotree' )
 	use ( 'tpope/vim-fugitive' )
-
-	use ( 'mfussenegger/nvim-dap' )
 
 	use {
 		"folke/trouble.nvim",
@@ -65,6 +70,14 @@ return require('packer').startup(function(use)
 			{'rafamadriz/friendly-snippets'},
 		}
 	}
+
+   use { "rcarriga/nvim-dap-ui",
+      requires =
+         {
+            "mfussenegger/nvim-dap",
+            "theHamsta/nvim-dap-virtual-text"
+         }
+   }
 
 
 end)
