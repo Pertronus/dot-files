@@ -1,7 +1,7 @@
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-	ensure_installed = { "sumneko_lua" },
+	ensure_installed = { "lua_ls" },
 	automatic_installation = true
 })
 
@@ -21,14 +21,27 @@ end
 
 require("mason-lspconfig").setup_handlers {
 	function (server_name) -- default handler (optional)
-		print( "hello" )
 		require("lspconfig")[server_name].setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
 	end,
-	["sumneko_lua"] = function()
-		lspconfig.sumneko_lua.setup {
+   ["rust_analyzer"] = function()
+      local rt = require("rust-tools")
+
+      rt.setup({
+         server = {
+            on_attach = function(_, bufnr)
+               -- Hover actions
+               vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+               -- Code action groups
+               vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+            end,
+         },
+      })
+   end,
+	["lua_ls"] = function()
+		lspconfig.lua_ls.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 			settings = {
@@ -49,4 +62,6 @@ require("mason-lspconfig").setup_handlers {
 		}
 	end
 }
+
+
 

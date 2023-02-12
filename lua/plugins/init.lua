@@ -6,11 +6,11 @@ return require('packer').startup(function(use)
 
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
-		requires = { 
+		requires = {
          {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-file-browser.nvim'
-         } 
+         }
       }
 	}
 
@@ -59,6 +59,7 @@ return require('packer').startup(function(use)
 
 			-- Autocompletion
 			{'hrsh7th/nvim-cmp'},
+         {'hrsh7th/cmp-cmdline'},
 			{'hrsh7th/cmp-buffer'},
 			{'hrsh7th/cmp-path'},
 			{'saadparwaiz1/cmp_luasnip'},
@@ -70,6 +71,10 @@ return require('packer').startup(function(use)
 			{'rafamadriz/friendly-snippets'},
 		}
 	}
+
+   use {
+      'simrat39/rust-tools.nvim'
+   }
 
    use { "rcarriga/nvim-dap-ui",
       requires =
