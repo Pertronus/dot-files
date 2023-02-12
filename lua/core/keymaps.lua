@@ -19,3 +19,7 @@ end)
 if vim.fn.executable "btm" == 1 then
    vim.keymap.set('n', '<leader>tt', '<cmd>lua _btm_toggle()<cr>', { noremap = true, silent = true })
 end
+
+if vim.fn.executable "lazygit" == 1 then
+   vim.keymap.set('n', '<leader>tg', '<cmd>lua _lazygit_toggle()<cr>', { noremap = true, silent = true })
+end
