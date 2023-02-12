@@ -15,3 +15,7 @@ vim.keymap.set('n', '<leader>s', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
 
+
+if vim.fn.executable "btm" == 1 then
+   vim.keymap.set('n', '<leader>tt', '<cmd>lua _btm_toggle()<cr>', { noremap = true, silent = true })
+end
