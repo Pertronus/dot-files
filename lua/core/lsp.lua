@@ -1,4 +1,6 @@
 
+local ih = require('inlay-hints')
+ih.setup()
 require('mason').setup()
 require('mason-lspconfig').setup({
 	ensure_installed = { "lua_ls" },
@@ -8,10 +10,13 @@ require('mason-lspconfig').setup({
 local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local on_attach = function( _, bufnr )
+local on_attach = function( client, bufnr )
+   ih.on_attach(client, bufnr)
+   ih.set_all()
+
 	local bufopts = { buffer=bufnr, silent=true, noremap=true }
 	vim.keymap.set( 'n', 'K', vim.lsp.buf.hover, bufopts )
-	vim.keymap.set( 'n', 'gd', vim.lsp.buf.type_definition, bufopts )
+	vim.keymap.set( 'n', 'gd', vim.lsp.buf.definition, bufopts )
 	vim.keymap.set( 'n', 'gt', vim.lsp.buf.type_definition, bufopts )
 	vim.keymap.set( 'n', 'gi', vim.lsp.buf.implementation, bufopts )
 	vim.keymap.set( 'n', '<leader>dn', vim.diagnostic.goto_next, bufopts)
@@ -27,18 +32,10 @@ require("mason-lspconfig").setup_handlers {
 		}
 	end,
    ["rust_analyzer"] = function()
-      local rt = require("rust-tools")
-
-      rt.setup({
-         server = {
-            on_attach = function(_, bufnr)
-               -- Hover actions
-               vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-               -- Code action groups
-               vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-            end,
-         },
-      })
+      lspconfig.rust_analyzer.setup {
+         on_attach = on_attach,
+         capabilities = capabilities
+      }
    end,
 	["lua_ls"] = function()
 		lspconfig.lua_ls.setup {
@@ -46,6 +43,9 @@ require("mason-lspconfig").setup_handlers {
 			capabilities = capabilities,
 			settings = {
 				Lua = {
+               hint = {
+                  enable = true
+               },
 					diagnostics = {
 						globals = { "vim" },
 						disable = { 'lowercase-global' }

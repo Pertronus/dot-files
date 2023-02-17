@@ -52,11 +52,21 @@ return require('packer').startup(function(use)
 		end
 	}
 
+   use {
+      'saecki/crates.nvim',
+      event = { "BufRead Cargo.toml" },
+      requires = { 
+         { 'nvim-lua/plenary.nvim' } 
+      },
+      config = function()
+         require('crates').setup()
+      end,
+   }
+
 	use {
-		'VonHeikemen/lsp-zero.nvim',
+		'neovim/nvim-lspconfig',
 		requires = {
 			-- LSP Support
-			{'neovim/nvim-lspconfig'},
 			{'williamboman/mason.nvim'},
 			{'williamboman/mason-lspconfig.nvim'},
 
@@ -72,12 +82,11 @@ return require('packer').startup(function(use)
 			-- Snippets
 			{'L3MON4D3/LuaSnip'},
 			{'rafamadriz/friendly-snippets'},
+
+         -- inlay hints
+         {'simrat39/inlay-hints.nvim'}
 		}
 	}
-
-   use {
-      'simrat39/rust-tools.nvim'
-   }
 
    use { "rcarriga/nvim-dap-ui",
       requires =
@@ -86,8 +95,6 @@ return require('packer').startup(function(use)
             "theHamsta/nvim-dap-virtual-text"
          }
    }
-
-
 end)
 
 
