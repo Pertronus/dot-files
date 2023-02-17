@@ -37,30 +37,58 @@ require("mason-lspconfig").setup_handlers {
          capabilities = capabilities
       }
    end,
-	["lua_ls"] = function()
-		lspconfig.lua_ls.setup {
-			on_attach = on_attach,
-			capabilities = capabilities,
-			settings = {
-				Lua = {
+   ["intelephense"] = function()
+      require'lspconfig'.intelephense.setup{
+         root_dir = function(_)
+            return vim.loop.cwd()
+         end,
+         settings = {
+            intelephense = {
+               files = {
+                  maxSize = 10000000;
+                  associations = {
+                     "*.php",
+                     "*.phtml",
+                     "*.inc",
+                     "*.api"
+                  }
+               };
+               environment = {
+                  shortOpenTag = true
+               };
+               client = {
+                  disableInlayHints = false
+               }
+            }
+         },
+         capabilities = capabilities,
+         on_attach = on_attach,
+      }
+   end,
+   ["lua_ls"] = function()
+      lspconfig.lua_ls.setup {
+         on_attach = on_attach,
+         capabilities = capabilities,
+         settings = {
+            Lua = {
                hint = {
                   enable = true
                },
-					diagnostics = {
-						globals = { "vim" },
-						disable = { 'lowercase-global' }
-					},
-					workspace = {
-						library = vim.api.nvim_get_runtime_file("", true),
-						checkThirdParty = false
-					},
-					telemetry = {
-						enable = false,
-					}
-				}
-			}
-		}
-	end
+               diagnostics = {
+                  globals = { "vim" },
+                  disable = { 'lowercase-global' }
+               },
+               workspace = {
+                  library = vim.api.nvim_get_runtime_file("", true),
+                  checkThirdParty = false
+               },
+               telemetry = {
+                  enable = false,
+               }
+            }
+         }
+      }
+   end
 }
 
 
