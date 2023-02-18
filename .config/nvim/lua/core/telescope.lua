@@ -1,20 +1,20 @@
 local tele = require("telescope")
 
 tele.setup {
-  extensions = {
-    file_browser = {
+   extensions = {
+      file_browser = {
          theme = "ivy",
          hijack_netrw = true,
-      mappings = {
-        ["i"] = {
+         mappings = {
+            ["i"] = {
                -- TODO(Hayes): Mappings
-        },
-        ["n"] = {
+            },
+            ["n"] = {
                -- TODO(Hayes): Mappings
-        },
+            },
+         },
       },
-    },
-  },
+   },
 }
 tele.load_extension("file_browser")
 tele.load_extension("dap")

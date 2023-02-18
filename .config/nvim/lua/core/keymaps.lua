@@ -1,4 +1,3 @@
-
 vim.g.mapleader = ','
 
 -- Telescope keymaps
@@ -12,7 +11,7 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fe', '<cmd>Telescope file_browser<cr>', {})
 
 vim.keymap.set('n', '<leader>s', function()
-	builtin.grep_string({ search = vim.fn.input("Grep > ") });
+   builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
 
 

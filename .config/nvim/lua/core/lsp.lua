@@ -1,10 +1,9 @@
-
 local ih = require('inlay-hints')
 ih.setup()
 require('mason').setup()
 require('mason-lspconfig').setup({
-	ensure_installed = { "lua_ls" },
-	automatic_installation = true
+   ensure_installed = { "lua_ls" },
+   automatic_installation = true
 })
 
 local lspconfig = require('lspconfig')
@@ -14,27 +13,27 @@ local on_attach = function( client, bufnr )
    ih.on_attach(client, bufnr)
    ih.set_all()
 
-	local bufopts = { buffer=bufnr, silent=true, noremap=true }
-	vim.keymap.set( 'n', 'K', vim.lsp.buf.hover, bufopts )
-	vim.keymap.set( 'n', 'gd', vim.lsp.buf.definition, bufopts )
-	vim.keymap.set( 'n', 'gt', vim.lsp.buf.type_definition, bufopts )
-	vim.keymap.set( 'n', 'gi', vim.lsp.buf.implementation, bufopts )
-	vim.keymap.set( 'n', '<leader>dn', vim.diagnostic.goto_next, bufopts)
-	vim.keymap.set( 'n', '<leader>dp', vim.diagnostic.goto_prev, bufopts)
-	vim.keymap.set( 'n', '<leader>do', '<cmd>Telescope diagnostics<cr>', bufopts)
+   local bufopts = { buffer=bufnr, silent=true, noremap=true }
+   vim.keymap.set( 'n', 'K', vim.lsp.buf.hover, bufopts )
+   vim.keymap.set( 'n', 'gd', vim.lsp.buf.definition, bufopts )
+   vim.keymap.set( 'n', 'gt', vim.lsp.buf.type_definition, bufopts )
+   vim.keymap.set( 'n', 'gi', vim.lsp.buf.implementation, bufopts )
+   vim.keymap.set( 'n', '<leader>dn', vim.diagnostic.goto_next, bufopts)
+   vim.keymap.set( 'n', '<leader>dp', vim.diagnostic.goto_prev, bufopts)
+   vim.keymap.set( 'n', '<leader>do', '<cmd>Telescope diagnostics<cr>', bufopts)
 end
 
 require("mason-lspconfig").setup_handlers {
-	function (server_name) -- default handler (optional)
+   function (server_name) -- default handler (optional)
       -- NOTE(HAyes): Rust is handled by rust tools
       if server_name == 'rust_analyzer' then
          return
       end
-		require("lspconfig")[server_name].setup {
-			on_attach = on_attach,
-			capabilities = capabilities,
-		}
-	end,
+      require("lspconfig")[server_name].setup {
+         on_attach = on_attach,
+         capabilities = capabilities,
+      }
+   end,
    ["intelephense"] = function()
       require'lspconfig'.intelephense.setup{
          root_dir = function(_)

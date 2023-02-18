@@ -5,13 +5,13 @@ local dap = require("dap")
 
 
 dap.listeners.after.event_initialized["dapui_config"]=function()
-  dapui.open()
+   dapui.open()
 end
 dap.listeners.before.event_terminated["dapui_config"]=function()
-  dapui.close()
+   dapui.close()
 end
 dap.listeners.before.event_exited["dapui_config"]=function()
-  dapui.close()
+   dapui.close()
 end
 
 vim.fn.sign_define('DapBreakpoint',{ text ='🟥', texthl ='', linehl ='', numhl =''})
@@ -25,7 +25,7 @@ vim.keymap.set('n', '<F12>', dap.step_out, bufopts )
 vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, bufopts )
 
 local extension_path = vim.env.HOME
-  .. "/.vscode-server-insiders/extensions/vadimcn.vscode-lldb-1.8.1/"
+.. "/.vscode-server-insiders/extensions/vadimcn.vscode-lldb-1.8.1/"
 local codelldb_path = extension_path .. "adapter/codelldb"
 local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
