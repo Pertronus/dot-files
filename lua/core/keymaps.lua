@@ -43,3 +43,6 @@ vim.keymap.set("v", "<leader>p", "\"+p")
 
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
+
+
+vim.keymap.set("n", "<leader>dap", '<cmd>lua require"dapui".toggle()<cr>', {})

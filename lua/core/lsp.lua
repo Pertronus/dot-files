@@ -26,17 +26,15 @@ end
 
 require("mason-lspconfig").setup_handlers {
 	function (server_name) -- default handler (optional)
+      -- NOTE(HAyes): Rust is handled by rust tools
+      if server_name == 'rust_analyzer' then
+         return
+      end
 		require("lspconfig")[server_name].setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
 	end,
-   ["rust_analyzer"] = function()
-      lspconfig.rust_analyzer.setup {
-         on_attach = on_attach,
-         capabilities = capabilities
-      }
-   end,
    ["intelephense"] = function()
       require'lspconfig'.intelephense.setup{
          root_dir = function(_)

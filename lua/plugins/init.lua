@@ -9,7 +9,9 @@ return require('packer').startup(function(use)
 		requires = {
          {
             'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope-file-browser.nvim'
+            'nvim-telescope/telescope-file-browser.nvim',
+            'nvim-telescope/telescope-dap.nvim',
+            'HUAHUAI23/telescope-dapzzzz'
          }
       }
 	}
@@ -55,8 +57,9 @@ return require('packer').startup(function(use)
    use {
       'saecki/crates.nvim',
       event = { "BufRead Cargo.toml" },
-      requires = { 
-         { 'nvim-lua/plenary.nvim' } 
+      requires = {
+         { 'nvim-lua/plenary.nvim' },
+         { 'simrat39/rust-tools.nvim' }
       },
       config = function()
          require('crates').setup()
@@ -69,6 +72,7 @@ return require('packer').startup(function(use)
 			-- LSP Support
 			{'williamboman/mason.nvim'},
 			{'williamboman/mason-lspconfig.nvim'},
+			{'jay-babu/mason-nvim-dap.nvim'},
 
 			-- Autocompletion
 			{'hrsh7th/nvim-cmp'},
@@ -92,7 +96,8 @@ return require('packer').startup(function(use)
       requires =
          {
             "mfussenegger/nvim-dap",
-            "theHamsta/nvim-dap-virtual-text"
+            "theHamsta/nvim-dap-virtual-text",
+            "rcarriga/cmp-dap"
          }
    }
 end)

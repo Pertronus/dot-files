@@ -2,6 +2,10 @@
 local cmp = require'cmp'
 
 cmp.setup({
+   enabled = function()
+      return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+         or require("cmp_dap").is_dap_buffer()
+   end,
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
@@ -35,6 +39,12 @@ cmp.setup.filetype('gitcommit', {
 	}, {
 			{ name = 'buffer' },
 		})
+})
+
+cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+  sources = {
+    { name = "dap" },
+  },
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).

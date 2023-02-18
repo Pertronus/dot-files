@@ -1,4 +1,6 @@
-require("telescope").setup {
+local tele = require("telescope")
+
+tele.setup {
   extensions = {
     file_browser = {
          theme = "ivy",
@@ -14,4 +16,6 @@ require("telescope").setup {
     },
   },
 }
-require("telescope").load_extension "file_browser"
+tele.load_extension("file_browser")
+tele.load_extension("dap")
+tele.load_extension("i23")
