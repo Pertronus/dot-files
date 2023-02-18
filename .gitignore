@@ -1,2 +1,13 @@
-plugin/
-.vim
+#Block everything
+
+/*
+
+#Allow these files to be version controlled
+!.gitignore
+!README.md
+
+# 
+!.config
+.config/*
+!.config/nvim
+.config/nvim/plugin
